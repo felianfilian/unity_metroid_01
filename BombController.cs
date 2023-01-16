@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float timeToExplode = 0.5f;
+    public GameObject explosion;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+           timeToExplode -= Time.deltaTime;
+        if(timeToExplode <= 0)
+        {
+            if(explosion != null)
+            {
+                Instantiate(explosion, transform.position, transform.rotation);
+            }
+            Destroy(gameObject);
+        }
     }
 }
