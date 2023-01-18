@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
 
     private new Rigidbody2D rigidbody;
+    private AbilityTracker abilities;
 
     private void Awake()
     {
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
 
         canDoubleJump = false;
+        abilities = GetComponent<AbilityTracker>();
     }
 
     void Update()
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.P) && standing.activeSelf)
+            if (Input.GetKeyDown(KeyCode.P) && standing.activeSelf && abilities.canDash)
             {
                 dashCounter = dashTime;
                 ShowAfterImage();
@@ -126,7 +128,7 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundPoint.position, 0.2f, whatIsGround);
 
-        if(Input.GetButtonDown("Jump") && (isGrounded || canDoubleJump))
+        if(Input.GetButtonDown("Jump") && (isGrounded || (canDoubleJump && abilities.canDoubleJump)))
         {
             if(isGrounded)
             {
@@ -177,7 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!ball.activeSelf)
         {
-            if(Input.GetAxisRaw("Vertical") < -0.9f)
+            if(Input.GetAxisRaw("Vertical") < -0.9f && abilities.canBall)
             {
                 ballCounter -= Time.deltaTime;
                 if(ballCounter <= 0)
@@ -212,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
     public void DropBomb()
     {
-        if (ball.activeSelf && Input.GetKeyDown(KeyCode.O))
+        if (ball.activeSelf && Input.GetKeyDown(KeyCode.O) && abilities.canBomb)
         {
             Instantiate(bomb, bombPoint.position, bombPoint.rotation);
         }
