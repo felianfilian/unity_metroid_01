@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
 
     public void DropBomb()
     {
-        if (ball.activeSelf)
+        if (ball.activeSelf && Input.GetKeyDown(KeyCode.O))
         {
             Instantiate(bomb, bombPoint.position, bombPoint.rotation);
         }
