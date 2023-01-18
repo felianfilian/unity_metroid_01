@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
     public float waitToBall = 0.5f;
     private float ballCounter;
 
+    [Header("Bomb")]
+    public Transform bombPoint;
+    public GameObject bomb;
+
     private bool canDoubleJump;
     private bool isGrounded;
 
@@ -90,6 +94,10 @@ public class PlayerController : MonoBehaviour
             if (standing.activeSelf)
             {
                 PlayerShot();
+            }
+            else
+            {
+                DropBomb();
             }
             PlayerBall();
         }
@@ -199,6 +207,14 @@ public class PlayerController : MonoBehaviour
                 ballCounter = waitToBall;
             }
             ballAnim.SetFloat("speed", Mathf.Abs(rigidbody.velocity.x));
+        }
+    }
+
+    public void DropBomb()
+    {
+        if (ball.activeSelf)
+        {
+            Instantiate(bomb, bombPoint.position, bombPoint.rotation);
         }
     }
 
