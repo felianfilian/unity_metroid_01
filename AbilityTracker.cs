@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class AbilityTracker : MonoBehaviour
 {
+    public static AbilityTracker instance;
+
     public bool canDoubleJump;
     public bool canDash;
     public bool canBall;
     public bool canBomb;
 
-    void Start()
+    private void Awake()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
