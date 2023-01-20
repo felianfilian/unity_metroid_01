@@ -30,9 +30,8 @@ public class AbilityUnlock : MonoBehaviour
             {
                 AbilityTracker.instance.canBomb = true;
             }
-
+            Destroy(gameObject);
         }
-            
-        Destroy(gameObject);
+        
     }
 }
