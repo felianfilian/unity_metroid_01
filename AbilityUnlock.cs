@@ -14,8 +14,23 @@ public class AbilityUnlock : MonoBehaviour
     {   
         if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("test");
-            AbilityTracker.instance.canDoubleJump = true;
+            if(canDoubleJump == true)
+            {
+                AbilityTracker.instance.canDoubleJump = true;
+            }
+            if(canDash == true)
+            {
+                AbilityTracker.instance.canDash = true;
+            }
+            if (canBall == true)
+            {
+                AbilityTracker.instance.canBall = true;
+            }
+            if (canBomb == true)
+            {
+                AbilityTracker.instance.canBomb = true;
+            }
+
         }
             
         Destroy(gameObject);
