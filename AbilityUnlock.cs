@@ -9,6 +9,7 @@ public class AbilityUnlock : MonoBehaviour
     public bool canBall;
     public bool canBomb;
 
+    public GameObject pickupEffect;
 
     private void OnTriggerEnter2D(Collider2D other)
     {   
@@ -30,6 +31,7 @@ public class AbilityUnlock : MonoBehaviour
             {
                 AbilityTracker.instance.canBomb = true;
             }
+            Instantiate(pickupEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         
