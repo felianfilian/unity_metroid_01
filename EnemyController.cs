@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        currentPoint = 0;
         waitcounter = waitAtPoint;
     }
 
