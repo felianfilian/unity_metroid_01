@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public Animator animator;
     public new Rigidbody2D rigidbody;
     public Transform[] patrolPoints;
 
@@ -50,7 +51,6 @@ public class EnemyController : MonoBehaviour
             {
                 waitcounter = waitAtPoint;
                 currentPoint += direction;
-                Debug.Log(direction);
                 if (currentPoint >= patrolPoints.Length-1)
                 {
                     direction = -1;
@@ -61,5 +61,6 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+        animator.SetFloat("speed", Mathf.Abs(rigidbody.velocity.x));
     }
 }
