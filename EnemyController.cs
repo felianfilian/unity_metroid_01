@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Rigidbody2D rigidbody;
+    public new Rigidbody2D rigidbody;
     public Transform[] patrolPoints;
 
     public float moveSpeed = 5f;
@@ -28,10 +28,26 @@ public class EnemyController : MonoBehaviour
             if(transform.position.x < patrolPoints[currentPoint].transform.position.x)
             {
                 rigidbody.velocity = new Vector2(moveSpeed, rigidbody.velocity.y);
+                transform.localScale = new Vector3(-1f, 1f, 1f);
             }
             else
             {
                 rigidbody.velocity = new Vector2(-moveSpeed, rigidbody.velocity.y);
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+        }
+        else
+        {
+            rigidbody.velocity = new Vector2(0f, rigidbody.velocity.y);
+            waitcounter -= Time.deltaTime;
+            if(waitcounter <= 0)
+            {
+                waitcounter = waitAtPoint;
+                currentPoint++;
+                if(currentPoint >= patrolPoints.Length)
+                {
+                    currentPoint = 0;
+                }
             }
         }
     }
