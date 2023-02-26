@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class DamagePlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int damageAmount = 1;
+
+    void OnCollisionEnter2D(Collision2D other)
     {
-        
+        if(other.gameObject.tag == "Player")
+        {
+            DealDamage();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if(other.tag == "Player")
+        {
+            DealDamage();
+        }
     }
+
+    public void DealDamage()
+    {
+        PlayerHealthController.instance.DamagePlayer(damageAmount);
+    }
+
 }

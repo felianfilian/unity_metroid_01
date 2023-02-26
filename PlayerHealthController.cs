@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
-    [HideInInspector]
+    public static PlayerHealthController instance;
+
+    // [HideInInspector]
     public int health;
     public int maxHealth = 10;
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
+    {
+        health = maxHealth;
+    }
+
     public void DamagePlayer(int damageAmount)
     {
         health -= damageAmount;
