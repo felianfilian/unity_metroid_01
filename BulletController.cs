@@ -6,6 +6,7 @@ public class BulletController : MonoBehaviour
 {
     public new Rigidbody2D rigidbody;
 
+    public int damageAmount = 1;
     public float bulletSpeed = 13f;
 
     public GameObject bulletImpactEffect;
@@ -25,6 +26,10 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyHealthController>().DamageEnemy(damageAmount);
+        }
         Instantiate(bulletImpactEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
